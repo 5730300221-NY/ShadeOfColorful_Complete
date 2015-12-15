@@ -42,15 +42,6 @@ public class GameManager {
 
 	public static void rungame() {
 
-//		gt = new GameTitle();
-//		gc = new GameScreen();
-//		gl = GameLogic.getInstance();
-//		frame = new GameWindow(gt);
-//		gameOver = new GameOver();
-//		howToPlay = new HowToPlay();
-//		newColor = new NewColor();
-//		highScore = new HighScore();
-
 		while (true) {
 			try {
 				Thread.sleep(35);
@@ -58,23 +49,19 @@ public class GameManager {
 				e.printStackTrace();
 			}
 			frame.getCurrentScene().repaint();
-			//frame.getCurrentScene().requestFocus();
 
 			if (frame.getCurrentScene() instanceof GameScreen) {
 				if (!Ingame) {
 					AudioUtility.playSound("GameSound");
 					Ingame = true;
 					frame.getCurrentScene().repaint();
-					//frame.getCurrentScene().requestFocus();
 				}
 				if (!((GameScreen) (frame.getCurrentScene())).isPauseStatus()) {
 					gl.logicUpdate();
-					//frame.getCurrentScene().repaint();
-					//frame.getCurrentScene().requestFocus();
 				}
-				//frame.getCurrentScene().repaint();
+
 			}
-			//frame.getCurrentScene().repaint();
+
 		}
 
 	}

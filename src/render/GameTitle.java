@@ -32,8 +32,8 @@ public class GameTitle extends JPanel {
 		this.setPreferredSize(new Dimension(1280, 720));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBorder(BorderFactory.createEmptyBorder(350, 700, 0, 0));
-		Stbn.setBorder(BorderFactory.createEmptyBorder(0, 0, 80, 0));
-		Hgbn.setBorder(BorderFactory.createEmptyBorder(0, 0, 80, 0));
+		Stbn.setBorder(BorderFactory.createEmptyBorder(0, 0, 100, 0));
+		Hgbn.setBorder(BorderFactory.createEmptyBorder(0, 0, 100, 0));
 		ClassLoader cloader = RenderableHolder.class.getClassLoader();
 		ImageIcon St1 = new ImageIcon(cloader.getResource("image/Start1.png"));
 		ImageIcon St0 = new ImageIcon(cloader.getResource("image/Start0.png"));
@@ -107,7 +107,7 @@ public class GameTitle extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				AudioUtility.playSound("Click");
-				GameManager.frame.switchScene(GameManager.highScore);
+				GameManager.frame.switchScene(new HighScore());
 			}
 		});
 

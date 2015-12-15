@@ -1,15 +1,23 @@
 package entity;
 
+import input.InputUtility;
+
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
 import render.IRenderable;
 import render.Resource;
 
 public class Beam implements IRenderable {
+	public static int BeamIndex = 0;
+	public void update(){
+		if (InputUtility.getKeyPressed(KeyEvent.VK_SPACE)){
+		BeamIndex = 1;}
+	}
 
 	@Override
 	public void draw(Graphics2D g2d) {
-		if (Sheep.getSheepIndex() == 1) {
+		if (BeamIndex == 1) {
 			if (Sheep.getSheepColor() == 0)
 				g2d.drawImage(Resource.Black_B, 110, 50, null);
 			else if (Sheep.getSheepColor() == 1)
@@ -62,8 +70,7 @@ public class Beam implements IRenderable {
 
 	@Override
 	public int getZ() {
-		return Integer.MAX_VALUE ;
+		return Integer.MAX_VALUE;
 	}
-	
 
 }

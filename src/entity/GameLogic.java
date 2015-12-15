@@ -519,7 +519,7 @@ public class GameLogic {
 
 	}
 
-	public synchronized static void KillWolf(int color) {
+	public static void KillWolf(int color) {
 		for (Wolf a : wolves) {
 			if (a.getWolfColor() == color) {
 				a.setDestroyed(true);
@@ -541,7 +541,10 @@ public class GameLogic {
 	}
 
 	public void logicUpdate() {
-		System.out.println("WolfGen = " + wolfGen);
+		synchronized (beam) {
+			beam.update();
+		}
+		//beam.update();
 		for (Wolf a : wolves) {
 			a.update();
 			if (a.collide(sheep) && !a.isDestroyed()) {
@@ -562,12 +565,15 @@ public class GameLogic {
 					e.printStackTrace();
 				}
 			}
+			
 			if (a.isDestroyed()) {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
 							Thread.sleep(40);
+							RenderableHolder.getInstance().add(beam);
+							RenderableHolder.getInstance().getRenderable().remove(beam);
 							wolves.remove(a);
 							RenderableHolder.getInstance().getRenderable()
 									.remove(a);
@@ -578,7 +584,23 @@ public class GameLogic {
 				}).start();
 			}
 		}
+//		try {
+//			Thread.sleep(40);
+//			RenderableHolder.getInstance().add(beam);
+//		} catch (InterruptedException e1) {
+//			
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		RenderableHolder.getInstance().add(beam);
+//		try {
+//		Thread.sleep(20);
+//		RenderableHolder.getInstance().getRenderable().remove(beam);
+//	} catch (InterruptedException e1) {
+//		
+//		// TODO Auto-generated catch block
+//		e1.printStackTrace();
+//	}
 		RenderableHolder.getInstance().getRenderable().remove(beam);
 
 		--spawnDelayCounter;

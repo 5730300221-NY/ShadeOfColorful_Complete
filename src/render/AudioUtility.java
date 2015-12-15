@@ -35,7 +35,7 @@ public class AudioUtility {
 		}
 	}
 
-	public static void playSound(String identifier) {
+	public synchronized static void playSound(String identifier) {
 
 		if (identifier.equalsIgnoreCase("Intro")) {
 			Intro.loop();

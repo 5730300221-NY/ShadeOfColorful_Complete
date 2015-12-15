@@ -29,12 +29,17 @@ public class GameWindow extends JFrame {
 	}
 
 	public void switchScene(JPanel frame) {
+		getContentPane().remove(currentFrame);
 		getContentPane().removeAll();
 		this.currentFrame = frame;
 		if (frame instanceof GameScreen) {
 			AudioUtility.stopSound("Intro");
 		}
-		getContentPane().add(frame);
+		if (frame instanceof GameTitle) {
+			AudioUtility.stopSound("GameSound");
+			AudioUtility.playSound("Intro");
+		}
+		getContentPane().add(currentFrame);
 		getContentPane().validate();
 		pack();
 		currentFrame.requestFocus();

@@ -1,6 +1,5 @@
 package render;
 
-
 import java.awt.Graphics2D;
 import entity.Sheep;
 

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
+import render.GameScreen;
 import render.IRenderable;
 
 public class PlayerStatus implements IRenderable {
@@ -16,13 +17,13 @@ public class PlayerStatus implements IRenderable {
 		Score = 0;
 	}
 
-	public Sheep getSheep() {
-		return sheep;
-	}
-
-	public void setSheep(Sheep sheep) {
-		this.sheep = sheep;
-	}
+//	public Sheep getSheep() {
+//		return sheep;
+//	}
+//
+//	public void setSheep(Sheep sheep) {
+//		this.sheep = sheep;
+//	}
 
 	public static int getRoundstate() {
 		return roundstate;
@@ -46,6 +47,9 @@ public class PlayerStatus implements IRenderable {
 		g2d.setColor(Color.WHITE);
 		g2d.drawString(getScore() + "", 1080, 70);
 		g2d.drawString("Round : " + getRoundstate() + "", 550, 70);
+		if (GameScreen.isPauseStatus()) {
+			g2d.drawString("Pause", 580, 350);
+		}
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entity.Beam;
 import entity.GameLogic;
 import entity.GameManager;
 import entity.Sheep;
@@ -21,7 +22,7 @@ import entity.Sheep;
 public class GameScreen extends JPanel {
 
 	private static JLabel Home;
-	private boolean PauseStatus;
+	private static boolean PauseStatus;
 
 	public GameScreen() {
 		Home = new JLabel();
@@ -45,16 +46,13 @@ public class GameScreen extends JPanel {
 
 				InputUtility.setPause(false);
 				if (!isPauseStatus()) {
+					
 					if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-						try {
-							Thread.sleep(100);
 							Sheep.setSheepIndex(0);
+							Beam.BeamIndex =0;
 							Sheep.setColor(0);
-						} catch (InterruptedException r) {
-							// e.printStackTrace();
-						}
-
 					}
+					
 					if (e.getKeyCode() == KeyEvent.VK_Q) {
 						Button.update(6);
 						InputUtility.keyRelease(e);
@@ -98,15 +96,17 @@ public class GameScreen extends JPanel {
 
 				if (!isPauseStatus()) {
 					if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-						Runnable r = new Runnable() {
+						Beam.BeamIndex =1;
+						new Thread(new Runnable() {
+							
 							@Override
 							public void run() {
 								AudioUtility.playSound("Attack");
 								Sheep.setSheepIndex(1);
-								GameLogic.KillWolf(Sheep.getSheepColor());
+								//Beam.BeamIndex =1;
+								GameLogic.KillWolf(Sheep.getSheepColor());	
 							}
-						};
-						new Thread(r).start(); 
+						}).start();
 					} 
 					
 					else if (e.getKeyCode() == KeyEvent.VK_Q) {
@@ -177,16 +177,16 @@ public class GameScreen extends JPanel {
 				AudioUtility.stopSound("Intro");
 				AudioUtility.stopSound("GameSound");
 				AudioUtility.playSound("Intro");
-				GameManager.frame.switchScene(new GameTitle());
+				GameManager.frame.switchScene(GameManager.gt);
 			}
 		});
 	}
 
-	public boolean isPauseStatus() {
+	public static boolean isPauseStatus() {
 		return PauseStatus;
 	}
 
-	public void setPauseStatus(boolean pauseStatus) {
+	public static void setPauseStatus(boolean pauseStatus) {
 		PauseStatus = pauseStatus;
 	}
 

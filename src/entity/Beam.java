@@ -10,10 +10,6 @@ import render.Resource;
 
 public class Beam implements IRenderable {
 	public static int BeamIndex = 0;
-	public void update(){
-		if (InputUtility.getKeyPressed(KeyEvent.VK_SPACE)){
-		BeamIndex = 1;}
-	}
 
 	@Override
 	public void draw(Graphics2D g2d) {

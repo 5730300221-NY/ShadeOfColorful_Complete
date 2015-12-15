@@ -3,7 +3,6 @@ package input;
 import java.awt.event.KeyEvent;
 import entity.Sheep;
 
-
 public class InputUtility {
 
 	private static boolean reset = false;
@@ -80,7 +79,7 @@ public class InputUtility {
 	public static void setSpace(boolean space) {
 		InputUtility.space = space;
 	}
-	
+
 	public static void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && space == false) {
 			InputUtility.setSpace(true);
@@ -226,21 +225,6 @@ public class InputUtility {
 		} else {
 			Sheep.setState(15);
 		}
-
-	}
-	private static boolean[] keyPressed = new boolean[256];
-
-	public static boolean getKeyPressed(int key) {
-		if (key < 0 || key >= 256)
-			return false;
-		return keyPressed[key];
-
-	}
-
-	public static void setKeyPressed(int key, boolean keypressed) {
-		if (key < 0 || key >= 256)
-			return;
-		InputUtility.keyPressed[key] = keypressed;
 
 	}
 

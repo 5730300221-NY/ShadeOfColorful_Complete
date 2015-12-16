@@ -152,7 +152,6 @@ public class HighScoreUtility {
 		if (!loadHighScore() || highScoreRecord == null) {
 			JOptionPane.showMessageDialog(null, "Error loading highscore.",
 					"Error", JOptionPane.ERROR_MESSAGE);
-			GameManager.frame.switchScene(GameManager.gt);
 			return;
 		}
 	}
